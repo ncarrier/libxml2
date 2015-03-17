@@ -1,0 +1,28 @@
+
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := libxml2
+LOCAL_DESCRIPTION := libxml2 is a XML C parser
+LOCAL_CATEGORY_PATH := libs/xml
+
+LOCAL_LIBRARIES := zlib
+
+LOCAL_EXPORT_C_INCLUDES := \
+	$(TARGET_OUT_STAGING)/usr/include/libxml2
+
+LOCAL_EXPORT_LDLIBS := \
+	-lxml2
+
+LOCAL_AUTOTOOLS_VERSION := 2.9.0
+LOCAL_AUTOTOOLS_ARCHIVE := $(LOCAL_MODULE)-$(LOCAL_AUTOTOOLS_VERSION).tar.gz
+LOCAL_AUTOTOOLS_SUBDIR := $(LOCAL_MODULE)-$(LOCAL_AUTOTOOLS_VERSION)
+
+LOCAL_AUTOTOOLS_CONFIGURE_ARGS := \
+	--enable-ipv6=no \
+	--without-lzma \
+	--without-readline \
+	--without-python
+
+include $(BUILD_AUTOTOOLS)
+
